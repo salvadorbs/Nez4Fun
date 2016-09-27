@@ -5,7 +5,7 @@ Setup
 ----
 - Pull a fresh copy of the Nez4Fun repository. The repository has the base Nez repository as a submodule so to fully download everything you need add the `--recursive` parameter when cloning:
 
-`git clone --recursive https://github.com/prime31/Nez-Samples.git`
+`git clone --recursive https://github.com/salvadorbs/Nez4Fun.git`
 
 - open Nez/Nez.sln and build that first
 
