@@ -35,15 +35,15 @@ namespace Pong_Clone_Nez
                 //Player 1
                 if (ball.transform.position.X <= 0)
                 {
-                    _p1Score++;
+                    _p2Score++;
                     ball.getComponent<Ball>().Reset();
                 }
 
                 //Player 2
                 if (ball.transform.position.X >= (Screen.width - ball.getComponent<Sprite>().width))
                 {
-                    _p2Score++;
-                    ball.getComponent<Ball>().Reset();
+                    _p1Score++;
+                    ball.getComponent<Ball>().Reset(false);
                 }
             }
 

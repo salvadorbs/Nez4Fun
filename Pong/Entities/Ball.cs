@@ -34,11 +34,10 @@ namespace Pong_Clone_Nez
             Reset();
         }
 
-        public void Reset()
+        public void Reset(bool fromPlayer1 = true)
         {
-            this.transform.position = new Vector2(Screen.width / 2 - 75, Screen.height / 2);
-            moveSpeed *= -1;
-            rigidbody.setVelocity(moveSpeed);
+            transform.position = new Vector2(Screen.width / 2 + 75 * (fromPlayer1 ? -1 : 1), Screen.height / 2);
+            rigidbody.setVelocity(moveSpeed * (fromPlayer1 ? 1 : -1));
         }
 
         void IUpdatable.update()
