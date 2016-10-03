@@ -9,7 +9,7 @@ namespace Pong_Clone_Nez
 {
     public class Player : Component, ITriggerListener, IUpdatable
     {
-        VirtualIntegerAxis _yAxisInput;
+        VirtualIntegerAxis _yAxisInput = new VirtualIntegerAxis();
         float _moveSpeed = 300f;
         Mover _mover;
         Texture2D _paddleSprite;
@@ -21,11 +21,10 @@ namespace Pong_Clone_Nez
             entity.addComponent(new Sprite(_paddleSprite));
 
             //Collider and Mover components
-            entity.colliders.add(new BoxCollider());
+            entity.addCollider(new BoxCollider());
             _mover = entity.addComponent(new Mover());
 
             //Vertical input keyboard up/down and position
-            _yAxisInput = new VirtualIntegerAxis();
             if (entity.name == "player")
             {
                 //First player - Up/Down

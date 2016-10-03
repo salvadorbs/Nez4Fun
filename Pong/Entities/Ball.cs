@@ -11,7 +11,7 @@ namespace Pong_Clone_Nez
     {
         public Vector2 moveSpeed = new Vector2(300, 300);
         Texture2D _ballSprite;
-        ArcadeRigidbody rigidbody;
+        ArcadeRigidbody _rigidbody;
 
         public override void onAddedToEntity()
         {
@@ -19,16 +19,16 @@ namespace Pong_Clone_Nez
             _ballSprite = entity.scene.content.Load<Texture2D>(Content.Sprites.ball);
             entity.addComponent(new Sprite(_ballSprite));
 
-            //Collider and Mover components
+            //Collider component
             entity.colliders.add(new CircleCollider());
 
-            //RigidBody
-            rigidbody = new ArcadeRigidbody()
+            //RigidBody component
+            _rigidbody = new ArcadeRigidbody()
                         .setMass(0.0001f)
                         .setFriction(0f)
                         .setElasticity(1f);
-            rigidbody.shouldUseGravity = false;
-            entity.addComponent(rigidbody);
+            _rigidbody.shouldUseGravity = false;
+            entity.addComponent(_rigidbody);
 
             //Position and
             Reset();
@@ -37,7 +37,7 @@ namespace Pong_Clone_Nez
         public void Reset(bool fromPlayer1 = true)
         {
             transform.position = new Vector2(Screen.width / 2 + 75 * (fromPlayer1 ? -1 : 1), Screen.height / 2);
-            rigidbody.setVelocity(moveSpeed * (fromPlayer1 ? 1 : -1));
+            _rigidbody.setVelocity(moveSpeed * (fromPlayer1 ? 1 : -1));
         }
 
         void IUpdatable.update()
@@ -47,7 +47,7 @@ namespace Pong_Clone_Nez
 
         void ITriggerListener.onTriggerEnter(Collider other, Collider self)
         {
-
+            //TODO: Modifier ball's speed
         }
 
 
