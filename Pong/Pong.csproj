@@ -39,8 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Ball.cs" />
+    <Compile Include="Entities\Border.cs" />
     <Compile Include="Entities\Score.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Components\PlayerController.cs" />
     <Compile Include="Scenes\Level.cs" />
     <Compile Include="ContentPathGenerator.cs">
       <AutoGen>True</AutoGen>
