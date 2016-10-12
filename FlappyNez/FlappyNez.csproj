@@ -56,16 +56,22 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\PlayerController.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ContentPathGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContentPathGenerator.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Plane.cs" />
+    <Compile Include="Entities\Background.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\RockManager.cs" />
+    <Compile Include="Entities\Terrain.cs" />
+    <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rock.cs" />
+    <Compile Include="Entities\Rock.cs" />
     <Compile Include="Scenes\Level.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,16 +7,17 @@ namespace FlappyNez
 {
     public class Game : Core
     {
-        public Game() : base(width: 600, height: 800, isFullScreen: false, enableEntitySystems: false)
+        public Game() : base(width: 320, height: 480, isFullScreen: false, enableEntitySystems: false)
         {}
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            //Window.AllowUserResizing = true;
+            Window.AllowUserResizing = false;
+            debugRenderEnabled = true;
 
-            // load up your initial scene here
+            //Load up your initial scene here
             scene = Scene.createWithDefaultRenderer<Level>(Color.MonoGameOrange);
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
 using FlappyNez.Entities;
+using FlappyNez.Factories;
 
 namespace FlappyNez.Scenes
 {
@@ -11,9 +12,13 @@ namespace FlappyNez.Scenes
     {
         public override void initialize()
         {
-            //Player
-            var planeEntity = createEntity("player");
-            planeEntity.addComponent(new Entities.Plane());
+            //Entities
+            addEntity(EntityFactory.Instance.CreateEntity(EntityType.Background));
+            //addEntity(EntityFactory.Instance.CreateEntity(EntityType.Player));
+            addEntity(EntityFactory.Instance.CreateEntity(EntityType.Terrain));
+            addEntity(EntityFactory.Instance.CreateEntity(EntityType.RockUp));
+            addEntity(EntityFactory.Instance.CreateEntity(EntityType.RockDown));
+            addEntity(EntityFactory.Instance.CreateEntity(EntityType.RockManager));
         }
     }
 }
