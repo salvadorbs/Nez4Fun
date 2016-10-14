@@ -12,9 +12,6 @@ namespace FlappyNez.Factories
     {
         Background,
         Player,
-        RockUp,
-        RockDown,
-        RockManager,
         Terrain
     }
 
@@ -35,12 +32,6 @@ namespace FlappyNez.Factories
                     return new Background();
                 case EntityType.Player:
                     return new Player();
-                case EntityType.RockUp:
-                    return new Rock();
-                case EntityType.RockDown:
-                    return new Rock(false);
-                case EntityType.RockManager:
-                    return new RockManager();
                 case EntityType.Terrain:
                     return new Terrain();
                 default:

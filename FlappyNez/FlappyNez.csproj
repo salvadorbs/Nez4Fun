@@ -65,8 +65,9 @@
     </Compile>
     <Compile Include="Entities\Background.cs" />
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\RockManager.cs" />
+    <Compile Include="Factories\RockFactory.cs" />
     <Compile Include="Entities\Terrain.cs" />
+    <Compile Include="Entities\TimedEvent.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
