@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace FlappyNez.Entities
 {
@@ -11,10 +9,10 @@ namespace FlappyNez.Entities
     {
         public Terrain() : base("Terrain")
         {
-            //Collider component
+            // Collider component
             var collider = addCollider(new BoxCollider());
 
-            //Set physics layer to 1 - avoid check collision with rocks
+            // Set physics layer to 1 - avoid check collision with rocks
             Flags.setFlagExclusive(ref collider.physicsLayer, 1);
         }
 
@@ -22,14 +20,14 @@ namespace FlappyNez.Entities
         {
             base.onAddedToScene();
 
-            //Load scrolling sprite
+            // Load scrolling sprite
             var _sprite = new ScrollingSprite(scene.content.Load<Texture2D>(Content.Terrain.groundGrass))
             {
                 scrollSpeedX = Constants.TerrainSpeed
         };
             addComponent(_sprite);
 
-            //Position
+            // Position
             transform.position = new Vector2((_sprite.width / 2), (Screen.height - (_sprite.height / 2)));
         }
     }

@@ -1,10 +1,6 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Nez;
-using Nez.Sprites;
-using FlappyNez.Entities;
+﻿using FlappyNez.Entities;
 using FlappyNez.Factories;
+using Nez;
 
 namespace FlappyNez.Scenes
 {
@@ -18,12 +14,11 @@ namespace FlappyNez.Scenes
             _rockManager = new RockFactory(this);
             _timedEvent = new TimedEvent((Screen.width / Constants.ObstaclesSpeed) - 1);
             _timedEvent.Interval += _rockManager.CreateRocks;
-            
 
-            //Entities
-            addEntity(EntityFactory.Instance.CreateEntity(EntityType.Background));
-            //addEntity(EntityFactory.Instance.CreateEntity(EntityType.Player));
-            addEntity(EntityFactory.Instance.CreateEntity(EntityType.Terrain));
+            // Entities
+            addEntity(EntityFactory.CreateEntity(EntityType.Background));
+            ///addEntity(EntityFactory.CreateEntity(EntityType.Player));
+            addEntity(EntityFactory.CreateEntity(EntityType.Terrain));
             addEntity(_timedEvent);
         }
     }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 #if MONOMAC
 using MonoMac.AppKit;
 using MonoMac.Foundation;
@@ -19,7 +18,7 @@ namespace FlappyNez
 #if __IOS__ || __TVOS__
     [Register("AppDelegate")]
     class Program : UIApplicationDelegate
-    
+
 #else
     static class Program
 #endif
@@ -83,7 +82,6 @@ namespace FlappyNez
         {
             return true;
         }
-    }  
+    }
 #endif
 }
-

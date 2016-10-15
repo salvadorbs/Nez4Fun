@@ -1,10 +1,6 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
-using Nez;
-using Nez.Sprites;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 using FlappyNez.Entities;
+using Nez;
 
 namespace FlappyNez.Factories
 {
@@ -19,8 +15,10 @@ namespace FlappyNez.Factories
 
         public void CreateRocks(object sender, EventArgs e)
         {
-            _scene.addEntity(new Rock());
-            _scene.addEntity(new Rock(false));
+            var _offset = Nez.Random.range(-60, 60);
+
+            _scene.addEntity(new Rock(_offset));
+            _scene.addEntity(new Rock(_offset, false));
         }
     }
 }

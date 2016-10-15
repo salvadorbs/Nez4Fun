@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nez;
 using FlappyNez.Entities;
+using Nez;
 
 namespace FlappyNez.Factories
 {
@@ -17,16 +13,9 @@ namespace FlappyNez.Factories
 
     class EntityFactory
     {
-        private static EntityFactory _instance = new EntityFactory();
-
-        public static EntityFactory Instance
+        public static Entity CreateEntity(EntityType type)
         {
-            get { return _instance; }
-        }
-
-        public Entity CreateEntity(EntityType Type)
-        {
-            switch (Type)
+            switch (type)
             {
                 case EntityType.Background:
                     return new Background();
@@ -35,7 +24,7 @@ namespace FlappyNez.Factories
                 case EntityType.Terrain:
                     return new Terrain();
                 default:
-                    throw new ArgumentException("type");
+                    throw new ArgumentException("entity type not supported");
             }
         }
     }

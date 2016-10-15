@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Nez;
-using Nez.Sprites;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
+using Nez;
 
 namespace FlappyNez.Components
 {
@@ -13,7 +10,7 @@ namespace FlappyNez.Components
 
         public override void onAddedToEntity()
         {
-            //Keyboard/Mouse/Touch/Joystick
+            // Keyboard/Mouse/Touch/Joystick
             Input.touch.enableTouchSupport();
             _input.nodes.Add(new Nez.VirtualButton.KeyboardKey(Keys.Space));
             _input.nodes.Add(new Nez.VirtualButton.MouseLeftButton());
@@ -26,7 +23,7 @@ namespace FlappyNez.Components
 
             if (rigidbody != null)
             {
-                if ((_input.isPressed) && (rigidbody.velocity.Y >= 0))
+                if (_input.isPressed && (rigidbody.velocity.Y >= 0))
                 {
                     rigidbody.setVelocity(Vector2.Zero);
                     rigidbody.addImpulse(Constants.PlayerSpeed);

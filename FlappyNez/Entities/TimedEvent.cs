@@ -1,9 +1,5 @@
-﻿using Nez;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Nez;
 
 namespace FlappyNez.Entities
 {
@@ -22,6 +18,7 @@ namespace FlappyNez.Entities
         public override void onAddedToScene()
         {
             base.onAddedToScene();
+
             OnInterval(new EventArgs());
         }
 
@@ -33,13 +30,13 @@ namespace FlappyNez.Entities
             {
                 _previousRefreshTime = Time.time;
 
-                OnInterval(new EventArgs( /* roba */ ));
+                OnInterval(new EventArgs());
             }
         }
 
         protected virtual void OnInterval(EventArgs e)
         {
-            EventHandler handler = Interval;
+            var handler = Interval;
 
             if (handler != null)
             {
