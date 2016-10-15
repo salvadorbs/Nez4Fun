@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Pong_Clone_Nez.Entities
 {
@@ -22,7 +20,8 @@ namespace Pong_Clone_Nez.Entities
         public Border(TypeBorder border) : base()
         {
             _border = border;
-            //Name
+
+            // Entity name
             switch (_border)
             {
                 case TypeBorder.leftVertical:
@@ -37,11 +36,9 @@ namespace Pong_Clone_Nez.Entities
                 case TypeBorder.downHorizontal:
                     this.name = "Borderdown";
                     break;
-                default:
-                    break;
             }
 
-            //Collider
+            // Collider
             colliders.add(new BoxCollider());
         }
 
@@ -52,7 +49,7 @@ namespace Pong_Clone_Nez.Entities
             Texture2D spriteBar;
             var pos = Vector2.Zero;
 
-            //Load sprite and set position
+            // Load sprite and set position
             switch (_border)
             {
                 case TypeBorder.leftVertical:
@@ -74,6 +71,8 @@ namespace Pong_Clone_Nez.Entities
                 default:
                     return;
             }
+
+            // Add sprite and set position
             addComponent(new Sprite(spriteBar));
             transform.position = pos;
         }

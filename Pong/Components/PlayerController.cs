@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Nez;
-using Nez.Sprites;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
+using Nez;
 
 namespace Pong_Clone_Nez.Components
 {
@@ -17,16 +14,16 @@ namespace Pong_Clone_Nez.Components
         {
             _mover = entity.addComponent(new Mover());
 
-            //Vertical input keyboard up/down and position
+            // Vertical input keyboard up/down and position
             if (entity.name == "player")
             {
-                //First player - Up/Down
+                // First player - Up/Down
                 entity.transform.position = new Vector2(40, Screen.height / 2);
                 _yAxisInput.nodes.Add(new Nez.VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.TakeNewer, Keys.W, Keys.S));
             }
             else
             {
-                //Second player - W/S
+                // Second player - W/S
                 entity.transform.position = new Vector2(Screen.width - 40, Screen.height / 2);
                 _yAxisInput.nodes.Add(new Nez.VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.TakeNewer, Keys.Up, Keys.Down));
             }
@@ -34,7 +31,7 @@ namespace Pong_Clone_Nez.Components
 
         void IUpdatable.update()
         {
-            //Handle movement
+            // Handle movement
             if (_yAxisInput != null)
             {
                 var moveDir = new Vector2(0, _yAxisInput.value);

@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Pong_Clone_Nez.Entities
 {
@@ -15,10 +13,10 @@ namespace Pong_Clone_Nez.Entities
 
         public Ball() : base("Ball")
         {
-            //Collider component
+            // Collider component
             colliders.add(new CircleCollider());
 
-            //RigidBody component
+            // RigidBody component
             _rigidbody = new ArcadeRigidbody()
                         .setMass(0.0001f)
                         .setFriction(0f)
@@ -31,11 +29,11 @@ namespace Pong_Clone_Nez.Entities
         {
             base.onAddedToScene();
 
-            //Load ball sprite and add it in entity
+            // Load ball sprite and add it in entity
             _ballSprite = scene.content.Load<Texture2D>(Content.Sprites.ball);
             addComponent(new Sprite(_ballSprite));
 
-            //Reset position
+            // Reset position
             Reset();
         }
 
