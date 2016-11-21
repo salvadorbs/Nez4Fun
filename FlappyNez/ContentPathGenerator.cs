@@ -5,6 +5,11 @@ namespace Nez
 {
 	class Content
 	{
+		public static class Font
+		{
+			public const string scoreFont = @"Font\scoreFont";
+		}
+
 		public static class Letters
 		{
 			public const string letterA = @"Letters\letterA";

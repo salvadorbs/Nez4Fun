@@ -1,24 +1,31 @@
 ﻿using System;
 using FlappyNez.Entities;
-using Nez;
+using FlappyNez.Scenes;
 
 namespace FlappyNez.Factories
 {
     class RockFactory
     {
-        Scene _scene;
+        readonly Level _level;
 
-        public RockFactory(Scene scene)
+        public RockFactory(Level scene)
         {
-            _scene = scene;
+            _level = scene;
         }
 
         public void CreateRocks(object sender, EventArgs e)
         {
-            var _offset = Nez.Random.range(-60, 60);
+            //if (_level.State == LevelState.Play)
+            //{
+                var _offset = Nez.Random.range(Constants.RockRangeMin, Constants.RockRangeMax);
 
-            _scene.addEntity(new Rock(_offset));
-            _scene.addEntity(new Rock(_offset, false));
+                // Rocks
+                _level.addEntity(new Rock(_offset));
+                _level.addEntity(new Rock(_offset, false));
+
+                // Star (between rocks)
+                _level.addEntity(new Star(_offset));
+            //}
         }
     }
 }

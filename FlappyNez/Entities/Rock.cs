@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FlappyNez.Scenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
@@ -7,11 +8,13 @@ namespace FlappyNez.Entities
 {
     class Rock : Entity
     {
-        string _spriteName = string.Empty;
+        readonly int _offset;
+        readonly Mover _mover;
+        string _spritePath = string.Empty;
         Sprite _sprite;
+        float _rockHeight;
+
         public bool IsUp;
-        int _offset;
-        Mover _mover;
 
         public Rock(int offset = 0, bool isUp = true) : base()
         {
@@ -21,12 +24,12 @@ namespace FlappyNez.Entities
             if (isUp)
             {
                 name = "Rock_Down";
-                _spriteName = Content.Terrain.rockGrassDown;
+                _spritePath = Content.Terrain.rockGrassDown;
             }
             else
             {
                 name = "Rock_Up";
-                _spriteName = Content.Terrain.rockGrass;
+                _spritePath = Content.Terrain.rockGrass;
             }
 
             // Mover component
@@ -38,16 +41,15 @@ namespace FlappyNez.Entities
             base.onAddedToScene();
 
             // Load sprite and add it in entity
-            _sprite = addComponent(new Sprite(scene.content.Load<Texture2D>(_spriteName)));
+            var _texture = scene.content.Load<Texture2D>(_spritePath);
+            _sprite = addComponent(new Sprite(_texture));
 
-            // RenderLayer to 1 because need drawing rock behind terrain
+            // RenderLayer to 1 because monogame must draws rock behind terrain
             _sprite.renderLayer = 1;
 
-            // Polygon Collider
-            var collider = addCollider(new PolygonCollider(GetRockVertices()));
-
-            // Must colliders with only layer 0 (in other words with plane only)
-            Flags.setFlagExclusive(ref collider.collidesWithLayers, 0);
+            // Polygon Collider - isTrigger to true because use of TriggerListeners
+            addCollider(new PolygonCollider(Utils.GetVerticesTexture(_texture)))
+                .isTrigger = true;
 
             ResetPosition();
         }
@@ -57,25 +59,9 @@ namespace FlappyNez.Entities
             var _gapHeight = MathHelper.Clamp(Constants.GapHeight, (_sprite.height / 2), _sprite.height);
             var realRockHeight = (Screen.height - _gapHeight) / 2;
             var nominalRockHeight = (_sprite.height / 2) - (_sprite.height - realRockHeight);
+            _rockHeight = IsUp ? (_offset + nominalRockHeight) : (_offset + Screen.height - nominalRockHeight);
 
-            transform.position = new Vector2((Screen.width + (_sprite.width / 2)),
-                IsUp ? (_offset + nominalRockHeight) : (_offset + Screen.height - nominalRockHeight));
-        }
-
-        private Vector2[] GetRockVertices()
-        {
-            // TODO: This code is dirty (and hard coded) solution. Rewrite this!
-            //       Must extract vertices from Texture2 as Farseer Physics does
-            var height = _sprite.height * (IsUp ? -1 : 1);
-            var width = _sprite.width * (IsUp ? 1 : -1);
-
-            var verts = new Vector2[4];
-            verts[(IsUp ? 1 : 0)] = new Vector2(8, -(height / 2));
-            verts[(IsUp ? 0 : 1)] = new Vector2(16, -(height / 2));
-            verts[2] = new Vector2(-(width / 2), (height / 2));
-            verts[3] = new Vector2((width / 2), (height / 2));
-
-            return verts;
+            transform.position = new Vector2((Screen.width), IsUp ? (-_sprite.height / 2) : (Screen.height + _sprite.height / 2));
         }
 
         public override void update()
@@ -83,11 +69,22 @@ namespace FlappyNez.Entities
             base.update();
 
             CollisionResult res;
-            _mover.move(new Vector2(-1, 0) * Constants.ObstaclesSpeed * Time.deltaTime, out res);
+            int vertical;
 
-            if (transform.position.X <= -(_sprite.width / 2))
+            if ((scene as Level).State == LevelState.Play)
             {
-                this.destroy();
+                // Move rock in Y or not?
+                if (IsUp)
+                    vertical = (transform.position.Y < (_rockHeight)) ? 5 : 0;
+                else
+                    vertical = (transform.position.Y > (_rockHeight)) ? -5 : 0;
+
+                // Move rock in two coords - X forever - Y until _RockHeight
+                _mover.move(new Vector2(-1, vertical) * Constants.ObstaclesSpeed * Time.deltaTime, out res);
+
+                // Destroy entity when it goes out of screen
+                if (transform.position.X <= -(_sprite.width / 2))
+                    this.destroy();
             }
         }
     }

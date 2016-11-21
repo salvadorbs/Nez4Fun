@@ -964,3 +964,9 @@
 /processorParam:TextureFormat=Color
 /build:Planes/planeYellow3.png
 
+#begin Font/scoreFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Font/scoreFont.spritefont
+

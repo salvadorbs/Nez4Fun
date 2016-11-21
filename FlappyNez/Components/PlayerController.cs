@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FlappyNez.Entities;
+using FlappyNez.Scenes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 
@@ -6,29 +8,33 @@ namespace FlappyNez.Components
 {
     class PlayerController : Component, IUpdatable
     {
-        VirtualButton _input = new VirtualButton();
+        readonly VirtualButton _input = new VirtualButton();
+        readonly VirtualButton _inputReset = new VirtualButton();
 
         public override void onAddedToEntity()
         {
-            // Keyboard/Mouse/Touch/Joystick
+            // Touch
             Input.touch.enableTouchSupport();
-            _input.nodes.Add(new Nez.VirtualButton.KeyboardKey(Keys.Space));
-            _input.nodes.Add(new Nez.VirtualButton.MouseLeftButton());
-            _input.nodes.Add(new Nez.VirtualButton.GamePadButton(0, Buttons.A));
+
+            // Keyboard/Mouse/Joystick
+            _input.addKeyboardKey(Keys.Space);
+            _input.addMouseLeftButton();
+            _input.addGamePadButton(0, Buttons.A);
+
+            _inputReset.addKeyboardKey(Keys.F1);
         }
 
         void IUpdatable.update()
         {
-            var rigidbody = entity.getComponent<ArcadeRigidbody>();
-
-            if (rigidbody != null)
+            // Jump (velocity to 0 and addforce in up)
+            if (((entity.scene as Level).State == LevelState.Play) && _input.isPressed)
             {
-                if (_input.isPressed && (rigidbody.velocity.Y >= 0))
-                {
-                    rigidbody.setVelocity(Vector2.Zero);
-                    rigidbody.addImpulse(Constants.PlayerSpeed);
-                }
+                ((Player)entity).Velocity = Vector2.Zero;
+                ((Player)entity).addForce(Constants.PlayerSpeed);
             }
+
+            if (_inputReset.isPressed)
+                Core.scene = Scene.createWithDefaultRenderer<Level>(Color.MonoGameOrange);
         }
     }
 }

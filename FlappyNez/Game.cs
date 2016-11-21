@@ -14,7 +14,12 @@ namespace FlappyNez
             base.Initialize();
 
             Window.AllowUserResizing = false;
+
+#if DEBUG
             debugRenderEnabled = true;
+#else
+            debugRenderEnabled = false;
+#endif
 
             // Load up your initial scene here
             scene = Scene.createWithDefaultRenderer<Level>(Color.MonoGameOrange);

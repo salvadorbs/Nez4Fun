@@ -11,9 +11,12 @@ namespace FlappyNez
     static class Constants
     {
         public const float ObstaclesSpeed = 50f;
-        public const float BackgroundSpeed = 100f;
-        public const float TerrainSpeed = 100f;
-        public const int GapHeight = 0;
+        public const float BackgroundSpeed = 25f;
+        public const float TerrainSpeed = 60f;
+        public const int GapHeight = 150;
+
+        public const int RockRangeMin = -60;
+        public const int RockRangeMax = 60;
 
         public static readonly Vector2 PlayerInitialPos = Screen.center;
         public static readonly Vector2 PlayerSpeed = new Vector2(0, -6);

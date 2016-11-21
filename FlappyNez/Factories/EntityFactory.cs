@@ -8,7 +8,8 @@ namespace FlappyNez.Factories
     {
         Background,
         Player,
-        Terrain
+        Terrain,
+        Score
     }
 
     class EntityFactory
@@ -23,6 +24,8 @@ namespace FlappyNez.Factories
                     return new Player();
                 case EntityType.Terrain:
                     return new Terrain();
+                case EntityType.Score:
+                    return new Score();
                 default:
                     throw new ArgumentException("entity type not supported");
             }

@@ -1,12 +1,13 @@
 ﻿using System;
 using Nez;
+using FlappyNez.Scenes;
 
 namespace FlappyNez.Entities
 {
     class TimedEvent : Entity
     {
-        float _previousRefreshTime = -0f;
-        float _refreshTime;
+        readonly float _refreshTime;
+        float _previousRefreshTime;
 
         public event EventHandler Interval;
 
@@ -19,6 +20,7 @@ namespace FlappyNez.Entities
         {
             base.onAddedToScene();
 
+            _previousRefreshTime = Time.time;
             OnInterval(new EventArgs());
         }
 
@@ -26,22 +28,18 @@ namespace FlappyNez.Entities
         {
             base.update();
 
-            if (Time.time - _previousRefreshTime > _refreshTime)
-            {
-                _previousRefreshTime = Time.time;
+            if ((scene as Level).State == LevelState.Play)
+                if (Time.time - _previousRefreshTime > _refreshTime)
+                {
+                    _previousRefreshTime = Time.time;
 
-                OnInterval(new EventArgs());
-            }
+                    OnInterval(new EventArgs());
+                }
         }
 
         protected virtual void OnInterval(EventArgs e)
         {
-            var handler = Interval;
-
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+            Interval?.Invoke(this, e);
         }
     }
 }
