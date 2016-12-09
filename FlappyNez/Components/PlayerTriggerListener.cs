@@ -24,26 +24,30 @@ namespace FlappyNez.Components
         {
             var _level = (Level)_player.scene;
 
-            // Check LevelState
-            if (_level.State == LevelState.Play)
+            if (other != self)
             {
-                // Check if other.entity is Star
-                if (other.entity is Star)
-                {
-                    // Destroy star and increment score
-                    other.entity.destroy();
-                    if (((Star)(other.entity)).FirstCollision)
-                    {
-                        _score.IncrementScore();
 
-                        // Workaround for double collisions with stars (why!?)
-                        ((Star)(other.entity)).FirstCollision = false;
-                    }
-                }
-                else
+                // Check LevelState
+                if (_level.State == LevelState.Play)
                 {
-                    // Else it is Terrain or Rocks and it is GameOver
-                    _level.State = LevelState.GameOver;
+                    // Check if other.entity is Star
+                    if (other.entity is Star)
+                    {
+                        // Destroy star and increment score
+                        other.entity.destroy();
+                        if (((Star)(other.entity)).FirstCollision)
+                        {
+                            _score.IncrementScore();
+
+                            // Workaround for double collisions with stars (why!?)
+                            ((Star)(other.entity)).FirstCollision = false;
+                        }
+                    }
+                    else
+                    {
+                        // Else it is Terrain or Rocks and it is GameOver
+                        _level.State = LevelState.GameOver;
+                    }
                 }
             }
         }

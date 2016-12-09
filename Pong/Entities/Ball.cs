@@ -14,7 +14,7 @@ namespace Pong_Clone_Nez.Entities
         public Ball() : base("Ball")
         {
             // Collider component
-            colliders.add(new CircleCollider());
+            addComponent<CircleCollider>();
 
             // RigidBody component
             _rigidbody = new ArcadeRigidbody()

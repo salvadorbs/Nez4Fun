@@ -15,8 +15,8 @@ namespace FlappyNez.Factories
 
         public void CreateRocks(object sender, EventArgs e)
         {
-            //if (_level.State == LevelState.Play)
-            //{
+            if (_level.State == LevelState.Play)
+            {
                 var _offset = Nez.Random.range(Constants.RockRangeMin, Constants.RockRangeMax);
 
                 // Rocks
@@ -25,7 +25,7 @@ namespace FlappyNez.Factories
 
                 // Star (between rocks)
                 _level.addEntity(new Star(_offset));
-            //}
+            }
         }
     }
 }

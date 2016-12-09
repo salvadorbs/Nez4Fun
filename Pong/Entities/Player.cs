@@ -9,8 +9,8 @@ namespace Pong_Clone_Nez.Entities
     {
         public Player(bool isPlayer1 = true) : base(isPlayer1 ? "player" : "player2")
         {
-            addComponent(new PlayerController());
-            addCollider(new BoxCollider());
+            addComponent<PlayerController>();
+            addComponent<BoxCollider>();
         }
 
         public override void onAddedToScene()

@@ -15,7 +15,7 @@ namespace FlappyNez
             // Get vertices of Texture
             uint[] texData = new uint[texture.Width * texture.Height];
             texture.GetData<uint>(texData);
-            Vertices verticesList = TextureConverter.DetectVertices(texData, texture.Width);
+            Vertices verticesList = TextureConverter.detectVertices(texData, texture.Width);
             Vector2[] verticesArray = verticesList.ToArray();
 
             // PolygonCollider has offset in center, so vertices does too

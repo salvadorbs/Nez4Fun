@@ -19,7 +19,7 @@ namespace FlappyNez.Entities
             FirstCollision = true;
 
             // Collider component
-            addCollider(new BoxCollider())
+            addComponent<BoxCollider>()
                 .isTrigger = true;
 
             // Mover component

@@ -1,8 +1,12 @@
-﻿using FlappyNez.Scenes;
+﻿using FarseerPhysics;
+using FarseerPhysics.Dynamics;
+using FlappyNez.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
+using Nez.Farseer;
 using Nez.Sprites;
+using Nez.Textures;
 
 namespace FlappyNez.Entities
 {
@@ -44,12 +48,12 @@ namespace FlappyNez.Entities
             var _texture = scene.content.Load<Texture2D>(_spritePath);
             _sprite = addComponent(new Sprite(_texture));
 
+            // Polygon Collider - isTrigger to true because use of TriggerListeners
+            addComponent(new PolygonCollider(Utils.GetVerticesTexture(_texture)))
+                .isTrigger = true;
+
             // RenderLayer to 1 because monogame must draws rock behind terrain
             _sprite.renderLayer = 1;
-
-            // Polygon Collider - isTrigger to true because use of TriggerListeners
-            addCollider(new PolygonCollider(Utils.GetVerticesTexture(_texture)))
-                .isTrigger = true;
 
             ResetPosition();
         }

@@ -28,7 +28,7 @@ namespace FlappyNez.Entities
         public Player() : base("Plane")
         {
             // Collider component - isTrigger to true because use of TriggerListeners
-            addCollider(new CircleCollider())
+            addComponent<CircleCollider>()
                 .isTrigger = true;
 
             // Mover component

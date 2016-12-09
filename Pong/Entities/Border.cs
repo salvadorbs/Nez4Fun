@@ -39,7 +39,7 @@ namespace Pong_Clone_Nez.Entities
             }
 
             // Collider
-            colliders.add(new BoxCollider());
+            addComponent<BoxCollider>();
         }
 
         public override void onAddedToScene()

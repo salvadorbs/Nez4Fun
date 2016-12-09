@@ -1,6 +1,7 @@
 ﻿using FlappyNez.Entities;
 using FlappyNez.Factories;
 using Nez;
+using Nez.Farseer;
 
 namespace FlappyNez.Scenes
 {
@@ -18,6 +19,9 @@ namespace FlappyNez.Scenes
 
         public override void initialize()
         {
+            base.initialize();
+            addRenderer(new DefaultRenderer());
+
             _rockManager = new RockFactory(this);
 
             // TimedEvent to create rocks and star every tot seconds

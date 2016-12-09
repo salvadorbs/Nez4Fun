@@ -22,7 +22,7 @@ namespace FlappyNez
 #endif
 
             // Load up your initial scene here
-            scene = Scene.createWithDefaultRenderer<Level>(Color.MonoGameOrange);
+            scene = new Level();
         }
     }
 }

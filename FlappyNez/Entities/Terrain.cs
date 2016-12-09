@@ -31,7 +31,7 @@ namespace FlappyNez.Entities
             for (int i = 0; i < colliderArray.Length; i++)
             {
                 colliderArray[i] = new PolygonCollider(Utils.GetVerticesTexture(_texture));
-                addCollider(colliderArray[i])
+                addComponent(colliderArray[i])
                     .isTrigger = true;
             }
 
