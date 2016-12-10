@@ -72,6 +72,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\LevelController.cs" />
     <Compile Include="Components\PlayerController.cs" />
     <Compile Include="Components\PlayerTriggerListener.cs" />
     <Compile Include="Constants.cs" />

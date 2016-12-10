@@ -1,6 +1,7 @@
 ﻿using FlappyNez.Entities;
 using FlappyNez.Scenes;
 using Nez;
+using Nez.Sprites;
 
 namespace FlappyNez.Components
 {
@@ -26,21 +27,23 @@ namespace FlappyNez.Components
 
             if (other != self)
             {
-
                 // Check LevelState
                 if (_level.State == LevelState.Play)
                 {
                     // Check if other.entity is Star
                     if (other.entity is Star)
                     {
-                        // Destroy star and increment score
-                        other.entity.destroy();
-                        if (((Star)(other.entity)).FirstCollision)
-                        {
-                            _score.IncrementScore();
+                        // Get star's sprite
+                        var starSprite = other.getComponent<Sprite>();
 
-                            // Workaround for double collisions with stars (why!?)
-                            ((Star)(other.entity)).FirstCollision = false;
+                        // Hide star and increment score
+                        if (starSprite != null)
+                        {
+                            if (starSprite.enabled)
+                            {
+                                _score.IncrementScore();
+                                starSprite.enabled = false;
+                            }
                         }
                     }
                     else

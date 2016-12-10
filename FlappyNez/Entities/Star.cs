@@ -12,12 +12,8 @@ namespace FlappyNez.Entities
         readonly int _offset;
         Sprite _sprite;
 
-        public bool FirstCollision { get; set; }
-
         public Star(int offset) : base("Star")
         {
-            FirstCollision = true;
-
             // Collider component
             addComponent<BoxCollider>()
                 .isTrigger = true;

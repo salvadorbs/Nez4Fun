@@ -1,5 +1,6 @@
 ﻿using FlappyNez.Entities;
 using FlappyNez.Factories;
+using FlappyNez.Components;
 using Nez;
 using Nez.Farseer;
 
@@ -34,6 +35,9 @@ namespace FlappyNez.Scenes
             var player = (Player)addEntity(EntityFactory.CreateEntity(EntityType.Player));
             player.Score = (IScore)addEntity(EntityFactory.CreateEntity(EntityType.Score));
             addEntity(_timedEvent);
+
+            // Scene components
+            addSceneComponent<LevelController>();
         }
     }
 }
